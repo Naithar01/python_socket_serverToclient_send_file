@@ -50,6 +50,9 @@ def Setting_Options():
 
 server_host, server_port, connect_Server_Host, connect_Server_Port = Setting_Options()
 
+# acceptServer #  connectServer
+# connectServer # acceptServer
+
 class Server:
     def __init__(self, server_host, server_port, connect_Server_Host, connect_Server_Port):
         self.SERVER_HOST = server_host
@@ -101,13 +104,22 @@ class Server:
 
     def SendFile(self):
         while True:
-            send_text = input()
+            # Print Message
 
-            if send_text == 'exit':
+            msg = self.acceptServer.recv(4096)
+
+            if msg == "exit":
                 self.DisconnectServerAndConnectServer()
 
-            print(send_text)
+            print(f"Get Msg {msg}")
 
+            # Send Message
 
+            send_text = input()
+
+            if send_text == "exit":
+                self.DisconnectServerAndConnectServer()
+
+            self.connectServer.send(send_text)
 
 Server(server_host, server_port, connect_Server_Host, connect_Server_Port)

@@ -101,12 +101,21 @@ class Server:
 
     def SendFile(self):
         while True:
+            # Send Message
+
             send_text = input()
 
-            if send_text == 'exit':
+            if send_text == "exit":
                 self.DisconnectServerAndConnectServer()
 
-            print(send_text)
+            self.connectServer.send(send_text)
 
+            # Get Message
+            msg = self.acceptServer.recv(4096)
+
+            if msg == "exit":
+                self.DisconnectServerAndConnectServer()
+
+            print(f"Get Msg {msg}")
 
 Server(server_host, server_port, connect_Server_Host, connect_Server_Port)
