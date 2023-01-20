@@ -18,13 +18,3 @@
         <p>ConnectServerAndAcceptServer Method -  <small> Wait Connect Connect_Server and Accept_Server ( If You Connect Suceess -> Print "Connect Success.." ) </small></p>
     </div>
 </div>
-
-
-
-
-<style>
-    * {
-        margin: 0px;
-        padding: 0px;
-    }
-</style>
