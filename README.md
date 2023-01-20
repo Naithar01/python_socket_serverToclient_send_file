@@ -2,11 +2,14 @@
 
 <h2>Server 1</h2>
 <header class="header">
-    <p>Define Socket Library</p>
+    <p>Define Socket Library & sys Library</p>
     <ul>
         <li>Define Server Host & Post</li>
         <li>Define Connect_Server Host & Post</li>
+        <li>Use sys library in argv method </li>
+        <li>setting host & port <small>Ex) python server1.py -sh localhost -sp 8001 -csh localhost -csp 8004</small></li>
     </ul>
+
 </header>
 <div class="main">
     <header class="main_header">
