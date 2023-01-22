@@ -1,6 +1,6 @@
 # Server to Server Socket 
 
-<h2>Server 1</h2>
+<h2>Server 1 & Server 2 </h2>
 <header class="header">
     <p>Define Socket Library & sys Library</p>
     <ul>
