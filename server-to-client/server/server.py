@@ -5,15 +5,15 @@ import datetime
 
 def RecvMsg(connect_client):
     while True:
-        msg = connect_client.recv(2048)
+        msg = connect_client.recv(8192)
 
         if msg:
             save_file_name = datetime.datetime.now()
 
             file = open(str(save_file_name).replace(":", " ") +'.jpg', "wb")
             file.write(msg)
-            file.close() 
 
+            file.close() 
 
 def SendMsg(connect_client, server):
     while True:
@@ -23,17 +23,14 @@ def SendMsg(connect_client, server):
             if len(send_msg) == 0:
                 server.close()
                 connect_client.close()
-                print("Close Server")
                 break
 
+            file = open(send_msg, 'rb')
+            image_data = file.read(8192)
 
-            if send_msg:
-                file = open(send_msg, 'rb')
-                image_data = file.read(8192)
+            connect_client.send(image_data)
 
-                connect_client.send(image_data)
-
-                file.close() 
+            file.close() 
 
         except:
             connect_client.close()
@@ -58,10 +55,9 @@ def CreateServer():
             send_thread = threading.Thread(target=SendMsg, args=(connect_client, server))
 
             # recv_thread.start()
-
             send_thread.start()
-
             RecvMsg(connect_client)
+
         except:
             server.close()          
             connect_client.close()  

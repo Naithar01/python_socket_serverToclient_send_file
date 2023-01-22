@@ -11,7 +11,8 @@ def RecvMsg(client):
             save_file_name = datetime.datetime.now()
 
             file = open(str(save_file_name).replace(":", " ") +'.jpg', "wb")
-            file.write(msg) 
+            file.write(msg)
+
             file.close()
 
 
@@ -24,15 +25,16 @@ def SendMsg(client):
                 print("Close Client")
                 break
 
-            if send_msg:
-                file = open(send_msg, 'rb')
-                image_data = file.read(8192)
+            file = open(send_msg, 'rb')
+            image_data = file.read(8192)
 
-                client.send(image_data)
+            client.send(image_data)
 
-                file.close() 
+            file.close()
+
         except:
             client.close()
+            print('Some Error')
             break
 
 def ConnectServer():
@@ -46,7 +48,6 @@ def ConnectServer():
             
             # recv_thread.start()
             send_thread.start()
-
             RecvMsg(client)
 
         except:
