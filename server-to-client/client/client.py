@@ -3,6 +3,8 @@ import threading
 
 import datetime
 
+import sys
+
 def RecvMsg(client):
     while True:
         msg = client.recv(8192)
@@ -23,7 +25,8 @@ def SendMsg(client):
 
             if len(send_msg) == 0:
                 print("Close Client")
-                break
+                client.close()
+                sys.exit()
 
             file = open(send_msg, 'rb')
             image_data = file.read(8192)
@@ -34,7 +37,6 @@ def SendMsg(client):
 
         except:
             client.close()
-            print('Some Error')
             break
 
 def ConnectServer():
@@ -43,10 +45,8 @@ def ConnectServer():
 
     while True:
         try:
-            # recv_thread = threading.Thread(target=RecvMsg, args=(client, ))
             send_thread = threading.Thread(target=SendMsg, args=(client, ))
             
-            # recv_thread.start()
             send_thread.start()
             RecvMsg(client)
 
